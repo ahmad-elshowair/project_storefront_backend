@@ -13,16 +13,16 @@ dotenv.config();
 const app: express.Application = express();
 
 // declare the port of the host 
-const port = process.env.PORT ||8000;
+const port = process.env.PORT || 3000;
 
-// initialize the app to use json 
+// initialize the app to use json
 app.use(express.json());
 
 // display a message at the main route
 app.get('/', (_req: express.Request, res: express.Response) => {
-  res.json({
-    message: "hello world message from the main route"
-  })
+	res.json({
+		message: 'hello world message from the main route',
+	});
 });
 
 user_routes(app);
@@ -33,7 +33,5 @@ dashboard_routes(app);
 
 // listen to the app on the port of 8000
 app.listen(port, () => {
-  console.log(`the app works on http://localhost:${port} `);
+	console.log(`the app works on http://localhost:${port} `);
 });
-
-export default app;

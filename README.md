@@ -63,7 +63,7 @@
 - PEPPER= pepper text to hash the password
 - SALT_ROUND= how many round for salting the password
 - TOKEN_SECRET= secret text or token
-- PORT= the server running on the port of 8000
+- PORT= the server running on the port of 3000
 
 ## **scripts**
 - dev             =====> dev package to run and refresh the server of time the code changed just after save the code
