@@ -17,7 +17,7 @@
   - order_products.js
 * spec
   - support
-    *jasmine.json
+    * jasmine.json
 * src 
   - Handlers
     * Order_Products.ts
@@ -38,7 +38,7 @@
       - Order.ts
       - Product.ts
       - User.ts
-     * Models
+    * Models
       - Order_Products.ts
       - Order.ts
       - Product.ts
