@@ -1,5 +1,5 @@
 CREATE TABLE orders(
-id INTEGER SERIAL PRIMARY KEY,
+id SERIAL PRIMARY KEY,
 "status" VARCHAR(50),
 "user_id" INTEGER REFERENCES users(id)
 );
