@@ -12,13 +12,10 @@ export class ProductStore {
       const connect = await client.connect();
       const sql = 'SELECT * FROM products';
       const result = await connect.query(sql);
-      if (result.rowCount === 0) {
-        throw new Error('there are no products to bring');
-      } else {
-        const products = result.rows;
-        connect.release();
-        return products;
-      }
+
+      const products = result.rows;
+      connect.release();
+      return products;
     } catch (error) {
       throw new Error(
         `Beep failed to get any product due to that error ${error}`
