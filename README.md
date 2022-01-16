@@ -47,6 +47,9 @@
   - database.ts
 * .env
 * .gitignore
+* .prettierrc
+* .perttierignore
+* .eslintrc.json
 * database.json
 * package-lock.json
 * package.json
@@ -75,6 +78,9 @@
 - test            =====> only test the suites test with jasmine
 - watch           =====> watch the code 
 - test-migrate    =====> migrate up all migrations files && test suites test && erase all migrations files
+- lint            =====> get any error with syntax stylish using eslint configurations
+- lint-fix        =====> fix all the error of syntax stylish
+- format          =====> formate code stylish using prettier configurations
 
 ## **package installation**
 - run npm install || yarn 
