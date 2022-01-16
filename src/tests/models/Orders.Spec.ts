@@ -68,10 +68,16 @@ describe('Test Order Model', () => {
       expect(orders).toEqual([order]);
     });
 
-    /* delete the order and the user*/
+    // test deleting the oder
+    it('should delete the order', async () => {
+      await modelOrder.delete(orderData.id as unknown as number);
+      const orders = await modelOrder.index();
+      expect(orders).toEqual([]);
+    });
+
+    /* after all specs done delete the order and the user*/
     afterAll(async () => {
-      await modelOrder.delete(1);
-      await modelUser.delete(1);
+      await modelUser.delete(userData.id as unknown as number);
     });
   });
   /* ==============================  END CRUD FUNCTIONALITY  ============================== */
