@@ -1,11 +1,7 @@
 {
   "spec_dir": "src/tests",
-  "spec_files": [
-    "**/*[sS]pec.?(m)ts"
-  ],
-  "helpers": [
-    "helpers/**/*.?(m)ts"
-  ],
+  "spec_files": ["**/*[sS]pec.?(m)ts"],
+  "helpers": ["helpers/**/*.?(m)ts"],
   "stopSpecOnExpectationFailure": false,
   "random": false
 }
