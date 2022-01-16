@@ -1,23 +1,12 @@
 import { Order, OrderModel } from '../../Models/Order';
 import { User, UserModel } from '../../Models/User';
+import client from '../../database';
 
 const modelOrder = new OrderModel();
 const modelUser = new UserModel();
-const userData: User = {
-  id: 1,
-  first_name: 'Thuy',
-  last_name: 'Pham',
-  email: 'thuy@email.com',
-  password_digest: 'password',
-};
-const orderData: Order = {
-  id: 1,
-  status: 'active',
-  user_id: userData.id as number,
-};
-let order: Order;
+
 /* ============================== START UNIT TEST ============================== */
-describe('Test Order Model', () => {
+describe('TEST ORDER MODEL', () => {
   /* ==============================  BEGIN ARE CRUD FUNCTIONS DECLARED?  ============================== */
   describe('check crud functions', () => {
     it('index method should be declared', () => {
@@ -46,26 +35,32 @@ describe('Test Order Model', () => {
   /* create a user before all  */
 
   describe('Test CRUD functionality', () => {
+    let user: User;
+    let orderData: Order;
     beforeAll(async () => {
-      await modelUser.create(userData);
+      const userData: User = {
+        first_name: 'Thuy',
+        last_name: 'Pham',
+        email: 'thuy@email.com',
+        password_digest: 'password',
+      };
+      user = await modelUser.create(userData);
     });
 
     /* test create order method functionality*/
     it('should create a new order', async () => {
-      order = await modelOrder.create(orderData);
-      expect({
-        status: order.status,
-        user_id: order.user_id,
-      }).toEqual({
-        status: orderData.status,
-        user_id: orderData.user_id,
+      orderData = await modelOrder.create({
+        status: 'active',
+        user_id: Number(user.id),
       });
+      expect(orderData.status).toEqual('active');
+      expect(orderData.user_id).toEqual(Number(user.id));
     });
 
     /* test order index method functionality */
     it('index method should return orders', async () => {
       const orders = await modelOrder.index();
-      expect(orders).toEqual([order]);
+      expect(orders).toContain(orderData);
     });
 
     // test deleting the oder
@@ -77,7 +72,12 @@ describe('Test Order Model', () => {
 
     /* after all specs done delete the order and the user*/
     afterAll(async () => {
-      await modelUser.delete(userData.id as unknown as number);
+      const connect = await client.connect();
+      const sqlOrder = 'DELETE FROM orders';
+      await connect.query(sqlOrder);
+      const sqlUser = 'DELETE FROM users';
+      await connect.query(sqlUser);
+      connect.release();
     });
   });
   /* ==============================  END CRUD FUNCTIONALITY  ============================== */
