@@ -29,9 +29,12 @@ describe('TEST ORDER_PRODUCTS MODEL', () => {
 
   /* ==============================  BEGIN CURD FUNCTIONALITY  ============================== */
   describe('Test CURD functionality', () => {
+    /* declare variables to will be assigned later within this describe block */
     let product: Product;
     let order: Order;
     let orderProducts: Order_Products;
+
+    /* before all specs create foreign key's tables  */
     beforeAll(async () => {
       const userData: User = {
         first_name: 'Thuy',
@@ -43,32 +46,40 @@ describe('TEST ORDER_PRODUCTS MODEL', () => {
         name: 'Nokia 8.3',
         price: 1000,
       };
+      // create a user
       const user: User = await modelUser.create(userData);
+
       const orderData: Order = {
         status: 'active',
-        user_id: Number(user.id),
+        user_id: user.id as unknown as number,
       };
-      order = await modelOrder.create(orderData);
+
+      // create a product
       product = await modelProduct.create(productData);
+
+      // creat an order
+      order = await modelOrder.create(orderData);
     });
-    // test create method
+
+    // test create order products method
     it('should create a new purchased product', async () => {
       orderProducts = await modelOrderProducts.create({
         quantity: 10,
-        order_id: Number(order.id),
-        product_id: Number(product.id),
+        order_id: order.id as unknown as number,
+        product_id: product.id as unknown as number,
       });
       expect(orderProducts.quantity).toEqual(10);
-      expect(orderProducts.order_id).toEqual(Number(order.id));
-      expect(orderProducts.product_id).toEqual(Number(product.id));
+      expect(orderProducts.order_id).toEqual(order.id as unknown as number);
+      expect(orderProducts.product_id).toEqual(product.id as unknown as number);
     });
 
-    // test index method
+    // test index order products method
     it('should return purchased products', async () => {
       const purchasedProducts = await modelOrderProducts.index();
       expect(purchasedProducts).toContain(orderProducts);
     });
 
+    /* after all spec delete the data from all tables */
     afterAll(async () => {
       const connect = await client.connect();
       const sqlOderProducts = 'DELETE FROM order_products';
