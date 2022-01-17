@@ -70,6 +70,19 @@ describe('TEST USER MODEL', () => {
       expect(getUser).toEqual(user);
     });
 
+    // test update user method functionality
+    it('should update a user', async () => {
+      const updateData: User = {
+        id: user.id,
+        first_name: 'Ahmad',
+        last_name: 'Elshowair',
+        email: 'elshowair@mail.com',
+        password_digest: '1933',
+      };
+      const updatedUser: User = await model.update(updateData);
+      expect(updatedUser.last_name).toEqual('Elshowair');
+    });
+
     // test deleting user
     it('should delete a user', async () => {
       await model.delete(user.id as unknown as number);
