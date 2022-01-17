@@ -44,7 +44,8 @@ const getProductById = async (
   res: express.Response
 ): Promise<void> => {
   try {
-    const product = await model.show(req.params.id);
+    const productId = parseInt(req.params.id);
+    const product = await model.show(productId);
     res.status(200).json(product);
   } catch (error) {
     throw new Error(`${error}`);
