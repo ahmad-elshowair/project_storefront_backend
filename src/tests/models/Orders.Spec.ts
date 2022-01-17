@@ -69,6 +69,17 @@ describe('TEST ORDER MODEL', () => {
       expect(order).toEqual(orderData);
     });
 
+    // test update order method functionality
+    it('should update an order', async () => {
+      const updateData: Order = {
+        id: orderData.id,
+        status: 'closed',
+        user_id: user.id as number,
+      };
+      const updatedOrder = await modelOrder.update(updateData);
+      expect(updatedOrder.status).toEqual('closed');
+    });
+
     // test deleting the oder
     it('should delete the order', async () => {
       await modelOrder.delete(orderData.id as unknown as number);
