@@ -44,11 +44,7 @@ const createUser = async (req: express.Request, res: express.Response) => {
     const create = await model.create(user);
 
     const token = jwt.sign({ user: create }, secret);
-    res.status(200).json({
-      message: 'a user has created',
-      user: create,
-      token: token,
-    });
+    res.status(200).json(token);
   } catch (error) {
     res.status(400).json({
       Message: 'cannot create a new user or the user is already excite !',
@@ -71,9 +67,7 @@ const editUser = async (req: express.Request, res: express.Response) => {
       user: editedUser,
     });
   } catch (error) {
-    res.status(400).json({
-      message: 'cannot update the user',
-    });
+    throw new Error(`${error}`);
   }
 };
 
@@ -103,10 +97,7 @@ const login = async (req: express.Request, res: express.Response) => {
     const { email, password } = req.body;
     const signIn = await model.login(email, password);
     const token = jwt.sign({ email, password }, secret);
-    res.status(200).json({
-      message: 'successfully login',
-      token: token,
-    });
+    res.status(200).json(token);
   } catch (error) {
     res.status(400).json({
       message: 'password incorrect !',
@@ -116,11 +107,11 @@ const login = async (req: express.Request, res: express.Response) => {
 
 const user_routes = (app: express.Application) => {
   app.get('/users', authorizeUser, getUsers);
-  app.get('/users/:id', authorizeUser, getUserById);
-  app.post('/users', createUser);
-  app.put('/users/:id', authorizeUser, editUser);
-  app.delete('/users/:id', authorizeUser, removeUser);
-  app.post('/users/login', login);
+  app.get('/get-user/:id', authorizeUser, getUserById);
+  app.post('/create-user', createUser);
+  app.put('/edit-user/:id', authorizeUser, editUser);
+  app.delete('/delete-user/:id', authorizeUser, removeUser);
+  app.post('/user-login', login);
 };
 
 export default user_routes;
