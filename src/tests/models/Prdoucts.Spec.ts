@@ -1,14 +1,10 @@
 import { Product, ProductStore } from '../../Models/Product';
 
-const modelProduct = new ProductStore();
-const productData: Product = {
-  id: 1,
-  name: 'Nokia 8.3',
-  price: 1000,
-};
-let product: Product;
 describe('TEST PRODUCT MODEL', () => {
   /* ==============================  BEGIN ARE CRUD FUNCTIONS DECLARED?  ============================== */
+
+  const modelProduct = new ProductStore();
+
   describe('are curd functions defined', () => {
     // define index method
     it('should defined index method', async () => {
@@ -39,6 +35,12 @@ describe('TEST PRODUCT MODEL', () => {
 
   /* ==============================  BEGIN CURD FUNCTIONALITY  ============================== */
   describe('Test CURD functionality', () => {
+    const productData: Product = {
+      id: 1,
+      name: 'Nokia 8.3',
+      price: 1000,
+    };
+    let product: Product;
     // create a new product
     it('should create new product', async () => {
       product = await modelProduct.create(productData);
@@ -55,6 +57,12 @@ describe('TEST PRODUCT MODEL', () => {
     it('index method should return products', async () => {
       const products = await modelProduct.index();
       expect(products).toEqual([product]);
+    });
+
+    // test show product method functionality
+    it('should return a product', async () => {
+      const getAProduct = await modelProduct.show(product.id as number);
+      expect(getAProduct).toEqual(product);
     });
 
     // test deleting product
