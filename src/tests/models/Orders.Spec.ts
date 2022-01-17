@@ -63,6 +63,12 @@ describe('TEST ORDER MODEL', () => {
       expect(orders).toContain(orderData);
     });
 
+    /* test show order method functionality */
+    it('should get an order', async () => {
+      const order = await modelOrder.show(orderData.id as number);
+      expect(order).toEqual(orderData);
+    });
+
     // test deleting the oder
     it('should delete the order', async () => {
       await modelOrder.delete(orderData.id as unknown as number);
