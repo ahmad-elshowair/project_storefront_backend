@@ -41,7 +41,7 @@ const getOrders = async (_req: express.Request, res: express.Response) => {
 
 const getOrder = async (req: express.Request, res: express.Response) => {
   try {
-    const order_id = req.params.id;
+    const order_id = parseInt(req.params.id);
     const order = await model.show(order_id);
     res.status(200).json(order);
   } catch (error) {
