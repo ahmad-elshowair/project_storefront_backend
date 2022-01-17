@@ -29,7 +29,7 @@ export class UserModel {
     }
   }
 
-  async show(id: string): Promise<User> {
+  async show(id: number): Promise<User> {
     try {
       const connect = await client.connect();
       const sql = 'SELECT * FROM users WHERE id = ($1)';
