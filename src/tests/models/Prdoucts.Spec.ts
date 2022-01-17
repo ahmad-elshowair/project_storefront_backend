@@ -65,6 +65,17 @@ describe('TEST PRODUCT MODEL', () => {
       expect(getAProduct).toEqual(product);
     });
 
+    // test update product method functionality
+    it('should update a product', async () => {
+      const updateData: Product = {
+        id: product.id,
+        name: 'iphone 13',
+        price: 1200,
+      };
+      const updatedProduct = await modelProduct.update(updateData);
+      expect(updatedProduct.name).toEqual('iphone 13');
+    });
+
     // test deleting product
     it('should delete the product', async () => {
       await modelProduct.delete(product.id as unknown as number);
