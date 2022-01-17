@@ -47,7 +47,8 @@ const getUsers = async (_req: express.Request, res: express.Response) => {
 
 const getUserById = async (req: express.Request, res: express.Response) => {
   try {
-    const user = await model.show(req.params.id);
+    const userId = parseInt(req.params.id);
+    const user = await model.show(userId);
     res.status(200).json({ ' the user': user });
   } catch (error) {
     res.status(400).json({
