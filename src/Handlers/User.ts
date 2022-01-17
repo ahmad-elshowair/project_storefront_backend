@@ -1,38 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import express from 'express';
 import { User, UserModel } from '../Models/User';
-import jwt, { JwtPayload } from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
+import { authorizeUser } from '../Services/auth';
 
 dotenv.config();
 const secret = process.env.TOKEN_SECRET as unknown as string;
 
 const model = new UserModel();
-
-const authorizeUser = (
-  req: express.Request,
-  res: express.Response,
-  next: () => void
-) => {
-  const user: User = {
-    id: parseInt(req.params.id),
-    first_name: '',
-    last_name: '',
-    email: '',
-    password_digest: '',
-  };
-  try {
-    const authorizationHeader = req.headers.authorization;
-    const token = authorizationHeader?.split(' ')[1] as string;
-    const decoded = jwt.verify(token, secret) as JwtPayload;
-    if (decoded.id !== user.id) {
-      throw new Error('user does not match');
-    }
-  } catch (error) {
-    res.status(401).json(error);
-  }
-  next();
-};
 
 const getUsers = async (_req: express.Request, res: express.Response) => {
   try {

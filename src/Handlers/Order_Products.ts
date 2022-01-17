@@ -1,32 +1,8 @@
 import express from 'express';
 import { Order_Products, OrderProductsModel } from '../Models/Order_Products';
-import jwt from 'jsonwebtoken';
-import dotenv from 'dotenv';
-
-dotenv.config();
-
-const { TOKEN_SECRET } = process.env;
+import { verifyAuthToken } from '../Services/auth';
 
 const model = new OrderProductsModel();
-
-const verifyAuthToken = (
-  req: express.Request,
-  res: express.Response,
-  next: () => void
-) => {
-  try {
-    const authorizationHeader = req.headers['authorization'];
-    const token = authorizationHeader?.split(' ')[1] as unknown as string;
-    if (token === null) return res.status(401);
-    jwt.verify(token, TOKEN_SECRET as unknown as string);
-  } catch (error) {
-    res.status(401).json({
-      message: 'access denied you must sign up or login',
-      error: error,
-    });
-  }
-  next();
-};
 
 const purchaseProduct = async (req: express.Request, res: express.Response) => {
   try {
