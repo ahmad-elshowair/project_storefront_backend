@@ -64,6 +64,12 @@ describe('TEST USER MODEL', () => {
       expect(users).toEqual([user]);
     });
 
+    // test show user method functionality
+    it('should get a user', async () => {
+      const getUser = await model.show(user.id as number);
+      expect(getUser).toEqual(user);
+    });
+
     // test deleting user
     it('should delete a user', async () => {
       await model.delete(user.id as unknown as number);
