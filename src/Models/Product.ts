@@ -36,7 +36,7 @@ export class ProductStore {
         throw new Error('the product is not excite!');
       }
     } catch (error) {
-      throw new Error(`Beep failed to get the user due to that ${error}`);
+      throw new Error(`Beep failed to get the product due to that ${error}`);
     }
   }
 
