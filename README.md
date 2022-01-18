@@ -32,6 +32,7 @@
   - Services
     * dashboard_controller.ts
     * dashboard_model.ts
+    * auth.ts
   - tests
     * Handlers
       - Order_Products.ts
@@ -59,6 +60,7 @@
 
 *to connect with the database use the following environmental variables*
 ## **environmental variables**
+- DB_PORT = the port of the database ===> 5432
 - DB_HOST= the host 
 - DB_NAME= name of the database
 - DB_USER= the user name or the owner of the database
@@ -68,8 +70,10 @@
 - TOKEN_SECRET= secret text or token
 - PORT= the server running on the port of 3000
 
+
+
 ## **scripts**
-- dev             =====> dev package to run and refresh the server of time the code changed just after save the code
+- dev             =====> nodemon package to run and refresh the server every time the code changed and saved
 - migrate-up      =====> run all the migrations 
 - migrate-down    =====> erase some of the migrations
 - migrate-reset   =====> erase all the migration
@@ -84,3 +88,8 @@
 
 ## **package installation**
 - run npm install || yarn 
+
+## Jasmine configurations are set to
+- dir             ======> src/tests
+- extension files ======> .ts
+- random          ======> false
