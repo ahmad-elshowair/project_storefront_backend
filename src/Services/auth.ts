@@ -14,12 +14,12 @@ export const authorizeUser = (
   _res: express.Response,
   next: () => void
 ) => {
+  const user_id = user.id as unknown as number;
   try {
     const authorizationHeader = req.headers.authorization;
     const token = authorizationHeader?.split(' ')[1] as string;
     const decoded: JwtPayload = jwt.verify(token, secret);
-    if (decoded.user.id !== user.id)
-      _res.status(401).json('user does not match');
+    if (decoded.user.id !== user_id) throw new Error('user does not match');
 
     next();
   } catch (error) {
