@@ -41,15 +41,10 @@ const createOrder = async (
       user_id,
     };
     const newOrder = await model.create(order);
-    res.send(200).json({
-      message: 'order has created successfully',
-      order: newOrder,
-    });
+    res.send(200).json(newOrder);
     console.log(newOrder);
   } catch (error) {
-    throw new Error(
-      `error just occurred could not able to create an order ${error}`
-    );
+    throw new Error(`${error}`);
   }
 };
 
@@ -106,10 +101,10 @@ const deleteOrder = async (req: express.Request, res: express.Response) => {
 const order_routes = (app: express.Application) => {
   // routes of the orders table
   app.get('/orders', verifyAuthToken, getOrders);
-  app.get('/orders/:id', verifyAuthToken, getOrder);
-  app.post('/orders', verifyAuthToken, createOrder);
-  app.put('/orders/:id', verifyAuthToken, editOrder);
-  app.delete('/orders/:id', verifyAuthToken, deleteOrder);
+  app.get('/get-order/:id', verifyAuthToken, getOrder);
+  app.post('/create-order', verifyAuthToken, createOrder);
+  app.put('/edit-order/:id', verifyAuthToken, editOrder);
+  app.delete('/delete-order/:id', verifyAuthToken, deleteOrder);
 };
 
 export default order_routes;
