@@ -37,10 +37,7 @@ const addProduct = async (
       price: req.body.price,
     };
     const newProduct = await model.create(product);
-    res.status(200).json({
-      message: 'product has created successfully',
-      product: newProduct,
-    });
+    res.status(200).json(newProduct);
   } catch (error) {
     throw new Error(`${error}`);
   }
@@ -97,10 +94,10 @@ const deleteProduct = async (req: express.Request, res: express.Response) => {
 
 const product_routes = (app: express.Application) => {
   app.get('/products', getProducts);
-  app.get('/products/:id', getProductById);
-  app.post('/products', verifyAuthToken, addProduct);
-  app.put('/products/:id', verifyAuthToken, editProduct);
-  app.delete('/products/:id', verifyAuthToken, deleteProduct);
+  app.get('/get-product/:id', getProductById);
+  app.post('/create-product', verifyAuthToken, addProduct);
+  app.put('/edit-product/:id', verifyAuthToken, editProduct);
+  app.delete('/delete-product/:id', verifyAuthToken, deleteProduct);
 };
 
 export default product_routes;
