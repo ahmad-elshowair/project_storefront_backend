@@ -89,8 +89,13 @@ describe('TEST ORDERS ENDPOINTS', () => {
       .expect(200);
   });
 
-  // after all specs delete the user that was created before all specs
+  // after all specs delete orders & the users that was created before all specs
   afterAll(async () => {
-    await client.query('DELETE FROM users');
+    const connect = await client.connect();
+    const order_sql = 'DELETE FROM orders';
+    await connect.query(order_sql);
+    const user_sql = 'DELETE FROM users';
+    await connect.query(user_sql);
+    connect.release;
   });
 });
