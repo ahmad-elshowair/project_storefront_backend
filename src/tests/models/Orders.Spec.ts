@@ -92,7 +92,8 @@ describe('TEST ORDER MODEL', () => {
       const connect = await client.connect();
       const sqlOrder = 'DELETE FROM orders';
       await connect.query(sqlOrder);
-      const sqlUser = 'DELETE FROM users';
+      const sqlUser =
+        'delete from users;\n alter sequence users_id_seq restart with 1;';
       await connect.query(sqlUser);
       connect.release();
     });

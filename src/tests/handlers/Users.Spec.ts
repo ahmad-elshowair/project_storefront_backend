@@ -3,6 +3,7 @@ import app from '../../server';
 import jwt, { JwtPayload } from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import { User } from '../../Models/User';
+import client from '../../database';
 
 dotenv.config();
 const request = supertest(app);
@@ -63,7 +64,7 @@ describe('TEST USER ENDPOINTS', () => {
       password_digest: '1995',
     };
     await request
-      .put(`/edit-user/${user_id}`)
+      .patch(`/edit-user/${user_id}`)
       .send(userData)
       .set('Authorization', `Bearer ${token}`)
       .expect(200);
@@ -75,5 +76,10 @@ describe('TEST USER ENDPOINTS', () => {
       .del(`/delete-user/${user_id}`)
       .set('Authorization', `Bearer ${token}`)
       .expect(200);
+  });
+  afterAll(async () => {
+    await client.query(
+      'delete from users;\n alter sequence users_id_seq restart with 1;'
+    );
   });
 });

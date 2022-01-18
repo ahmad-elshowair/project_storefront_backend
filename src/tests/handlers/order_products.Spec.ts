@@ -105,7 +105,8 @@ describe('TEST ORDER_PRODUCTS ENDPOINTS', () => {
     await connect.query(orders_sql);
     const products_sql = 'DELETE FROM products';
     await connect.query(products_sql);
-    const users_sql = 'DELETE FROM users';
+    const users_sql =
+      'delete from users;\n alter sequence users_id_seq restart with 1;';
     await connect.query(users_sql);
     connect.release();
   });

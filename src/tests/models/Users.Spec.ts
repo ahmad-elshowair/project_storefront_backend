@@ -1,3 +1,4 @@
+import client from '../../database';
 import { User, UserModel } from '../../Models/User';
 
 const model = new UserModel();
@@ -89,6 +90,11 @@ describe('TEST USER MODEL', () => {
       const users = await model.index();
       expect(users).toEqual([]);
     });
+  });
+  afterAll(async () => {
+    await client.query(
+      'delete from users;\n alter sequence users_id_seq restart with 1;'
+    );
   });
   /* ==============================  END CRUD FUNCTIONALITY  ============================== */
 });

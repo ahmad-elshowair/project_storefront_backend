@@ -79,6 +79,8 @@ describe('TEST PRODUCTS ENDPOINTS', () => {
 
   // after all test delete the user that had created before all tests
   afterAll(async () => {
-    await client.query('DELETE FROM users');
+    await client.query(
+      'delete from users;\n alter sequence users_id_seq restart with 1;'
+    );
   });
 });
