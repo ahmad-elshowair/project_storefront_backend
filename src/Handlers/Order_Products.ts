@@ -6,9 +6,7 @@ const model = new OrderProductsModel();
 
 const purchaseProduct = async (req: express.Request, res: express.Response) => {
   try {
-    const order_id = parseInt(req.params.id);
-    const product_id = req.body.product_id;
-    const quantity = parseInt(req.body.quantity);
+    const { order_id, product_id, quantity } = req.body;
     if (
       order_id === undefined ||
       product_id === undefined ||
@@ -46,7 +44,7 @@ const getOrderProducts = async (
 };
 
 const order_products_routes = (app: express.Application) => {
-  app.post('/orders/:id/products', verifyAuthToken, purchaseProduct);
+  app.post('/purchase-product', verifyAuthToken, purchaseProduct);
   app.get('/order-products', verifyAuthToken, getOrderProducts);
 };
 
