@@ -14,11 +14,13 @@ const { TOKEN_SECRET } = process.env;
 
 const request = supertest(app);
 
-describe('TEST ORDER_PRODUCTS ENDPOINTS', async () => {
+describe('TEST ORDER_PRODUCTS ENDPOINTS', () => {
   let token: string;
   let user_id: number;
   let product_id: number;
   let order_id: number;
+
+  // before all specs testing
   beforeAll(async () => {
     // new data for user
     const user_data: User = {
