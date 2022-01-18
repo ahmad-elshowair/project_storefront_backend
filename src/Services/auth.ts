@@ -18,11 +18,13 @@ export const authorizeUser = (
     const authorizationHeader = req.headers.authorization;
     const token = authorizationHeader?.split(' ')[1] as string;
     const decoded: JwtPayload = jwt.verify(token, secret);
-    decoded.user.id === user.id;
+    if (decoded.user.id !== user.id)
+      _res.status(401).json('user does not match');
+
+    next();
   } catch (error) {
     throw new Error(`${error}`);
   }
-  next();
 };
 
 // verify token
@@ -35,8 +37,8 @@ export const verifyAuthToken = (
     const authorizationHeader = req.headers['authorization'];
     const token = authorizationHeader?.split(' ')[1] as unknown as string;
     jwt.verify(token, secret);
+    next();
   } catch (error) {
     throw new Error(`${error}`);
   }
-  next();
 };
