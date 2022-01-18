@@ -8,27 +8,27 @@ dotenv.config();
 const secret = process.env.TOKEN_SECRET as unknown as string;
 let user: User;
 
+// verify user
 export const authorizeUser = (
   req: express.Request,
-  res: express.Response,
+  _res: express.Response,
   next: () => void
 ) => {
   try {
     const authorizationHeader = req.headers.authorization;
     const token = authorizationHeader?.split(' ')[1] as string;
-    const decoded = jwt.verify(token, secret) as JwtPayload;
-    if (decoded.id !== user.id) {
-      throw new Error('user does not match');
-    }
+    const decoded: JwtPayload = jwt.verify(token, secret);
+    decoded.user.id === user.id;
   } catch (error) {
-    res.status(401).json(error);
+    throw new Error(`${error}`);
   }
   next();
 };
 
+// verify token
 export const verifyAuthToken = (
   req: express.Request,
-  res: express.Response,
+  _res: express.Response,
   next: () => void
 ): void => {
   try {
@@ -36,10 +36,7 @@ export const verifyAuthToken = (
     const token = authorizationHeader?.split(' ')[1] as unknown as string;
     jwt.verify(token, secret);
   } catch (error) {
-    res.status(401).json({
-      message: 'access denied you must sign up or login',
-      error: error,
-    });
+    throw new Error(`${error}`);
   }
   next();
 };
