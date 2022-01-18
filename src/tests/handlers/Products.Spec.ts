@@ -40,7 +40,6 @@ describe('TEST PRODUCTS ENDPOINTS', () => {
       .then((res) => {
         expect(res.body.price).toEqual(1000);
         product_id = res.body.id;
-        console.log(product_id);
       });
   });
 
