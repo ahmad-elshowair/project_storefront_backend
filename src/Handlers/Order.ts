@@ -41,7 +41,7 @@ const createOrder = async (
       user_id,
     };
     const newOrder = await model.create(order);
-    res.send(200).json(newOrder);
+    res.json(newOrder);
   } catch (error) {
     throw new Error(`${error}`);
   }
@@ -52,22 +52,13 @@ const editOrder = async (
   res: express.Response
 ): Promise<void> => {
   try {
-    const status = req.body;
-    const user_id: number = parseInt(req.body);
-    const id: number = parseInt(req.params.id);
-
-    if (id === undefined || status === undefined || user_id === undefined) {
-      res.status(400).json({
-        message: 'the inputs of the order are required and must be valid',
-      });
-    }
     const order: Order = {
-      status,
-      user_id,
-      id,
+      status: req.body.status,
+      user_id: req.body.user_id,
+      id: req.params.id as unknown as number,
     };
     const editedOrder = await model.update(order);
-    res.status(200).json({
+    res.json({
       message: 'order has edited successfully',
       product: editedOrder,
     });
