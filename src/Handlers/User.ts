@@ -3,7 +3,7 @@ import express from 'express';
 import { User, UserModel } from '../Models/User';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
-import { authorizeUser } from '../Services/auth';
+import { verifyAuthToken } from '../Services/auth';
 
 dotenv.config();
 const secret = process.env.TOKEN_SECRET as unknown as string;
@@ -15,9 +15,7 @@ const getUsers = async (_req: express.Request, res: express.Response) => {
     const users = await model.index();
     res.status(200).json(users);
   } catch (error) {
-    res.status(400).json({
-      Message: 'not able to get users',
-    });
+    throw new Error(`${error}`);
   }
 };
 
@@ -106,11 +104,11 @@ const login = async (req: express.Request, res: express.Response) => {
 };
 
 const user_routes = (app: express.Application) => {
-  app.get('/users', authorizeUser, getUsers);
-  app.get('/get-user/:id', authorizeUser, getUserById);
+  app.get('/users', verifyAuthToken, getUsers);
+  app.get('/get-user/:id', verifyAuthToken, getUserById);
   app.post('/create-user', createUser);
-  app.put('/edit-user/:id', authorizeUser, editUser);
-  app.delete('/delete-user/:id', authorizeUser, removeUser);
+  app.put('/edit-user/:id', verifyAuthToken, editUser);
+  app.delete('/delete-user/:id', verifyAuthToken, removeUser);
   app.post('/user-login', login);
 };
 
