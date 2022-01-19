@@ -199,6 +199,7 @@ These are the notes from a meeting with the frontend developer that describe wha
 
 ### Order_products
 - id         ====> serial primary key
+- quantity   ====> integer
 - order_id   ====> bigint FK references orders (id)
 - product_id ====> bigint FK references products (id)
  
