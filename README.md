@@ -74,6 +74,8 @@ CREATE DATABASE store_front_test;
 ###### grant all databases to the user
 `
 GRANT ALL PRIVILEGES ON DATABASE store_front TO full_stack_user;
+`
+`
 GRANT ALL PRIVILEGES ON DATABASE store_front_test TO full_stack_user;
 `
 
