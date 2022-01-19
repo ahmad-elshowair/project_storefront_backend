@@ -58,17 +58,39 @@
 * REQUIREMENTS.md
 * tsconfig.json
 
-*to connect with the database use the following environmental variables*
+## Setup the DB
+###### create user
+``
+CREATE USER full_stack_user WITH PASSWORD 'pass1993';
+``
+###### create DB
+`
+CREATE DATABASE store_front;
+`
+`
+CREATE DATABASE store_front_test;
+`
+
+###### grant all databases to the user
+`
+GRANT ALL PRIVILEGES ON DATABASE store_front TO full_stack_user;
+GRANT ALL PRIVILEGES ON DATABASE store_front_test TO full_stack_user;
+`
+
+
+
+
 ## **environmental variables**
-- DB_PORT = the port of the database ===> 5432
-- DB_HOST= the host 
-- DB_NAME= name of the database
-- DB_USER= the user name or the owner of the database
-- DB_PASSWORD= password of the database
-- PEPPER= pepper text to hash the password
-- SALT_ROUND= how many round for salting the password
-- TOKEN_SECRET= secret text or token
-- PORT= the server running on the port of 3000
+*to connect with the database use the following environmental variables:-*
+- DB_PORT=      =====> the port of the database ===> 5432
+- DB_HOST=      =====> the host 
+- DB_NAME=      =====> name of the database
+- DB_USER=      =====> the user name or the owner of the database
+- DB_PASSWORD=  =====> password of the database
+- PEPPER=       =====> pepper text to hash the password
+- SALT_ROUND=   =====> how many round for salting the password
+- TOKEN_SECRET= =====> secret text for token
+- PORT=         =====> the server running on the port of 3000
 
 
 
