@@ -84,15 +84,16 @@ GRANT ALL PRIVILEGES ON DATABASE store_front_test TO full_stack_user;
 
 ## **environmental variables**
 *to connect with the database use the following environmental variables:-*
-- DB_PORT=      =====> the port of the database ===> 5432
-- DB_HOST=      =====> the host 
-- DB_NAME=      =====> name of the database
-- DB_USER=      =====> the user name or the owner of the database
-- DB_PASSWORD=  =====> password of the database
-- PEPPER=       =====> pepper text to hash the password
-- SALT_ROUND=   =====> how many round for salting the password
-- TOKEN_SECRET= =====> secret text for token
-- PORT=         =====> the server running on the port of 3000
+- DB_PORT=        =====> the port of the database ===> 5432
+- DB_HOST=        =====> the host 
+- DB_NAME=        =====> name of the database
+- DB_NAME_TEST=   =====> name of the test database
+- DB_USER=        =====> the user name or the owner of the database
+- DB_PASSWORD=    =====> password of the database
+- PEPPER=         =====> pepper text to hash the password
+- SALT_ROUND=     =====> how many round for salting the password
+- TOKEN_SECRET=   =====> secret text for token
+- PORT=           =====> the server running on the port of 3000
 
 
 
