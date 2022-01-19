@@ -10,9 +10,9 @@
     "migrate-reset": "npx db-migrate reset",
     "compile": "npx tsc",
     "start": "node scr/server.ts",
-    "test": "jasmine-ts",
+    "jasmine": "jasmine-ts",
     "watch": "tsc-watch --esModuleInterop src/server.ts --outDir ./dist --onSuccess 'node ./dist/server.js'",
-    "test-migrate": "yarn migrate-up && yarn test && yarn migrate-reset",
+    "test": "set ENV=test && db-migrate --env test up && jasmine-ts && db-migrate --env test reset",
     "lint": "eslint . --ext .ts",
     "lint-fix": "eslint . --ext .ts --fix",
     "format": "prettier --config .prettierrc --write src/**/*.ts"
