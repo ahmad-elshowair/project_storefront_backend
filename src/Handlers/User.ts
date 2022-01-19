@@ -103,10 +103,10 @@ const login = async (req: express.Request, res: express.Response) => {
 
 const user_routes = (app: express.Application) => {
   app.get('/users', verifyAuthToken, getUsers);
-  app.get('/get-user/:id', getUserById);
+  app.get('/get-user/:id', verifyAuthToken, getUserById);
   app.post('/create-user', createUser);
-  app.patch('/edit-user/:id', authorizeUser, editUser);
-  app.delete('/delete-user/:id', removeUser);
+  app.patch('/edit-user/:id', verifyAuthToken, editUser);
+  app.delete('/delete-user/:id', verifyAuthToken, removeUser);
   app.post('/user-login', login);
 };
 
