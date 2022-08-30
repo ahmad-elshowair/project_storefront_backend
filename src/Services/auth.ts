@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { NextFunction } from 'express';
 import dotenv from 'dotenv';
 import jwt, { JwtPayload } from 'jsonwebtoken';
 import { User } from '../Models/User';
@@ -12,7 +12,7 @@ let user: User;
 export const authorizeUser = (
   req: express.Request,
   _res: express.Response,
-  next: () => void
+  next: NextFunction
 ) => {
   const user_id = user.id as unknown as number;
   try {
@@ -31,7 +31,7 @@ export const authorizeUser = (
 export const verifyAuthToken = (
   req: express.Request,
   _res: express.Response,
-  next: () => void
+  next: NextFunction
 ): void => {
   try {
     const authorizationHeader = req.headers['authorization'];

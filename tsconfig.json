@@ -101,7 +101,7 @@
   
   "include": [
     "./src",
-    "src/tests/helper/reporter.ts"
+    "src/helper/reporter.ts"
   ],"exclude": [
     "node_modules",
     "dist",
